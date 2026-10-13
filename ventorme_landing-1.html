@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Ventorme — профориентация</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700&family=Onest:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* Layout: один столбец, оффер + CTA в первом экране, дальше короткие блоки и закреплённая кнопка */
+:root{
+  --paper:#F2F4F8;
+  --surface:#FFFFFF;
+  --ink:#0C1A33;
+  --muted:#53607A;
+  --line:#D9DEE8;
+  --accent:#FF5A2B;
+  --accent-ink:#FFFFFF;
+  --mint:#0F8F7A;
+  --mint-bg:#DDF3EE;
+  --font-display:'Unbounded','Arial Black',sans-serif;
+  --font-body:'Onest','Segoe UI',Arial,sans-serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0A1224;--surface:#13203B;--ink:#F1F4FA;--muted:#9AA8C4;--line:#24345A;
+    --accent:#FF6B3F;--accent-ink:#1A0A03;--mint:#4FD1B8;--mint-bg:#10312F;color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0A1224;--surface:#13203B;--ink:#F1F4FA;--muted:#9AA8C4;--line:#24345A;
+  --accent:#FF6B3F;--accent-ink:#1A0A03;--mint:#4FD1B8;--mint-bg:#10312F;color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font:400 1rem/1.55 var(--font-body);
+  padding-inline:16px;padding-block:0 96px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:640px;margin-inline:auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+.top{display:flex;align-items:center;justify-content:space-between;padding-block:18px}
+.logo{font-family:var(--font-display);font-weight:700;font-size:1.15rem;letter-spacing:-.02em;text-decoration:none}
+.logo i{color:var(--accent);font-style:normal}
+.tag{font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+
+.hero{padding-block:12px 36px;display:flex;flex-direction:column;gap:20px}
+.eyebrow{margin:0;font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--mint)}
+h1{
+  margin:0;font-family:var(--font-display);font-weight:700;
+  font-size:clamp(1.85rem,8.2vw,2.9rem);line-height:1.08;letter-spacing:-.03em;text-wrap:balance;
+}
+h1 em{font-style:normal;background:linear-gradient(transparent 62%,color-mix(in srgb,var(--accent) 45%,transparent) 62%)}
+.lead{margin:0;font-size:1.06rem;color:var(--muted);max-width:46ch}
+.checks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.checks li{display:flex;gap:12px;align-items:center;font-weight:500}
+.checks svg{flex:none;width:26px;height:26px;padding:5px;border-radius:50%;background:var(--mint-bg);color:var(--mint)}
+
+.cta{
+  display:flex;align-items:center;justify-content:center;gap:10px;
+  min-height:58px;padding:14px 22px;border-radius:14px;
+  background:var(--accent);color:var(--accent-ink);
+  font:600 1.05rem/1.2 var(--font-body);text-decoration:none;text-align:center;
+  box-shadow:0 8px 24px -10px var(--accent);
+  transition:transform .15s ease,box-shadow .15s ease;
+}
+.cta:hover{transform:translateY(-2px)}
+.cta:active{transform:translateY(0)}
+.note{margin:0;font-size:.85rem;color:var(--muted)}
+
+section{padding-block:36px;border-top:1px solid var(--line)}
+h2{margin:0 0 20px;font-family:var(--font-display);font-weight:500;font-size:clamp(1.3rem,5.4vw,1.75rem);line-height:1.15;letter-spacing:-.02em;text-wrap:balance}
+
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:12px;counter-reset:s}
+.steps li{
+  counter-increment:s;display:grid;grid-template-columns:44px 1fr;gap:4px 14px;
+  padding:18px;border-radius:16px;background:var(--surface);border:1px solid var(--line);
+}
+.steps li::before{
+  content:counter(s);grid-row:span 2;align-self:start;
+  width:44px;height:44px;border-radius:12px;display:grid;place-items:center;
+  font:700 1.1rem var(--font-display);background:var(--ink);color:var(--paper);
+}
+.steps h3{margin:0;font-size:1.05rem;line-height:1.3}
+.steps p{margin:0;color:var(--muted);font-size:.95rem}
+
+.feat{display:grid;gap:12px}
+.feat article{padding:20px;border-radius:16px;background:var(--surface);border:1px solid var(--line)}
+.feat h3{margin:0 0 6px;font-size:1.05rem}
+.feat p{margin:0;color:var(--muted);font-size:.95rem}
+.exams{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.exams span{padding:6px 12px;border-radius:999px;background:var(--mint-bg);color:var(--mint);font-weight:600;font-size:.85rem}
+
+details{border-bottom:1px solid var(--line)}
+summary{
+  list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;
+  padding:16px 0;font-weight:600;min-height:48px;align-items:center;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"+";font:500 1.4rem var(--font-body);color:var(--accent);transition:transform .2s}
+details[open] summary::after{transform:rotate(45deg)}
+details p{margin:0 0 16px;color:var(--muted);max-width:52ch}
+
+.final{display:flex;flex-direction:column;gap:16px}
+.final h2{margin:0}
+
+footer{padding-block:28px 8px;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted)}
+
+.sticky{
+  position:fixed;inset-inline:0;bottom:0;z-index:10;
+  padding:10px 16px calc(10px + env(safe-area-inset-bottom,0px));
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);
+  transform:translateY(110%);transition:transform .25s ease;
+}
+.sticky.show{transform:none}
+.sticky .cta{max-width:640px;margin-inline:auto;min-height:54px}
+
+@media (min-width:720px){
+  .wrap{max-width:760px}
+  .feat{grid-template-columns:1fr 1fr}
+  .feat .wide{grid-column:span 2}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .cta,.sticky,summary::after{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <a class="logo" href="#top" id="top">vent<i>or</i>me</a>
+    <span class="tag">Профориентация</span>
+  </header>
+
+  <main>
+    <div class="hero" id="hero">
+      <p class="eyebrow">Твой следующий шаг</p>
+      <h1>Какая профессия подходит <em>именно тебе?</em></h1>
+      <p class="lead">Ответь на вопросы о своих интересах и наметь маршрут к профессии и университету.</p>
+
+      <ul class="checks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Профориентационный тест</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Подбор университетов</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>План подготовки: IELTS / SAT / ЕНТ</li>
+      </ul>
+
+      <a class="cta js-cta" id="main-cta" href="https://ventorme.ai/register?utm_source=hacknext&amp;utm_campaign=team-070">Пройти тест и открыть результат <span aria-hidden="true">→</span></a>
+      <p class="note">Для открытия результата потребуется вход или регистрация в Ventorme.</p>
+    </div>
+
+    <section aria-labelledby="how">
+      <h2 id="how">Что произойдёт после нажатия</h2>
+      <ol class="steps">
+        <li>
+          <h3>Отвечаешь на вопросы</h3>
+          <p>Вопросы о твоих интересах и о том, что тебе нравится делать.</p>
+        </li>
+        <li>
+          <h3>Входишь в Ventorme</h3>
+          <p>Через Google или по почте и паролю. Так результат сохранится в твоём аккаунте.</p>
+        </li>
+        <li>
+          <h3>Открываешь результат</h3>
+          <p>Видишь подходящие профессии и университеты и получаешь план подготовки.</p>
+        </li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="inside">
+      <h2 id="inside">Что внутри Ventorme</h2>
+      <div class="feat">
+        <article>
+          <h3>Профориентационный тест</h3>
+          <p>Показывает, в какую сторону двигаться, исходя из твоих интересов.</p>
+        </article>
+        <article>
+          <h3>Подбор университетов</h3>
+          <p>Маршрут от профессии к университету, а не наоборот.</p>
+        </article>
+        <article class="wide">
+          <h3>План подготовки</h3>
+          <p>Что готовить и в каком порядке, чтобы двигаться к выбранной цели.</p>
+          <div class="exams" aria-label="Экзамены в плане подготовки"><span>IELTS</span><span>SAT</span><span>ЕНТ</span></div>
+        </article>
+      </div>
+    </section>
+
+    <section aria-labelledby="faq">
+      <h2 id="faq">Частые вопросы</h2>
+      <details>
+        <summary>Нужно ли регистрироваться?</summary>
+        <p>Да. Чтобы открыть персональный результат, нужно войти или зарегистрироваться в Ventorme.</p>
+      </details>
+      <details>
+        <summary>Как можно войти?</summary>
+        <p>Через аккаунт Google или по почте и паролю.</p>
+      </details>
+      <details>
+        <summary>Для кого этот тест?</summary>
+        <p>Для тех, кто выбирает профессию и университет и хочет понять, с чего начать подготовку к IELTS, SAT или ЕНТ.</p>
+      </details>
+    </section>
+
+    <section class="final" aria-labelledby="last">
+      <h2 id="last">Узнай, куда двигаться дальше</h2>
+      <a class="cta js-cta" href="https://ventorme.ai/register?utm_source=hacknext&amp;utm_campaign=team-070">Пройти тест и открыть результат <span aria-hidden="true">→</span></a>
+    </section>
+  </main>
+
+  <footer>HackNext × Ventorme · учебный проект команды</footer>
+</div>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <a class="cta js-cta" href="https://ventorme.ai/register?utm_source=hacknext&amp;utm_campaign=team-070" tabindex="-1">Пройти тест и открыть результат <span aria-hidden="true">→</span></a>
+</div>
+
+<script>
+/* ID команды. Ссылка обновляется на всех кнопках (.js-cta). */
+var TEAM_ID = 'team-070';
+var URL_BASE = 'https://ventorme.ai/register?utm_source=hacknext&utm_campaign=';
+document.querySelectorAll('.js-cta').forEach(function(a){ a.href = URL_BASE + encodeURIComponent(TEAM_ID); });
+
+/* Закреплённая кнопка появляется, когда главная кнопка ушла за экран */
+var sticky = document.getElementById('sticky');
+var main = document.getElementById('main-cta');
+var stickyLink = sticky.querySelector('a');
+function setSticky(on){
+  sticky.classList.toggle('show', on);
+  sticky.setAttribute('aria-hidden', on ? 'false' : 'true');
+  stickyLink.tabIndex = on ? 0 : -1;
+}
+if ('IntersectionObserver' in window) {
+  new IntersectionObserver(function(e){ setSticky(!e[0].isIntersecting && e[0].boundingClientRect.top < 0); }).observe(main);
+}
+</script>
+</body>
+</html>
